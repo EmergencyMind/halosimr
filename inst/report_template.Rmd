@@ -1,0 +1,77 @@
+---
+title: "HALO Readiness Simulation Report"
+output: html_document
+params:
+  n_providers: 200
+  n_days: 365
+  schedule_type: "3/7 Day"
+  rate: 0.1
+  readiness_model: "exponential"
+  readiness_half_life_days: 60
+  readiness_threshold_days: 90
+  training_program: "monthly"
+  n_mc: 50
+  seed: 42
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE,
+                      fig.width = 8, fig.height = 4)
+library(halosimr)
+p <- params
+```
+
+Simulation of `r p$n_providers` providers over `r p$n_days` days, `r p$schedule_type`
+schedules, HALO events at `r p$rate`/day, `r p$readiness_model` readiness.
+
+```{r single-run}
+sched <- generate_schedule(p$n_providers, p$n_days, p$schedule_type, seed = p$seed)
+ev    <- generate_events(p$n_days, rate = p$rate, seed = p$seed)
+sim   <- hsrun(halo_sim(
+  sched, ev,
+  readiness_model = p$readiness_model,
+  readiness_half_life_days = p$readiness_half_life_days,
+  readiness_threshold_days = p$readiness_threshold_days,
+  training_program = p$training_program, seed = p$seed
+))
+sim
+```
+
+## Single run
+
+```{r single-figs}
+plot_readiness(sim)
+plot_gap_distribution(sim)
+plot_exposure_histogram(sim)
+```
+
+## Monte Carlo (`r p$n_mc` runs)
+
+```{r mc}
+mc <- hsrunmc(
+  n = p$n_mc,
+  schedule_fn = function(s) generate_schedule(p$n_providers, p$n_days, p$schedule_type, seed = s),
+  events_fn   = function(s) generate_events(p$n_days, rate = p$rate, seed = s),
+  readiness_model = p$readiness_model,
+  readiness_half_life_days = p$readiness_half_life_days,
+  readiness_threshold_days = p$readiness_threshold_days,
+  training_program = p$training_program
+)
+mc
+plot_mc_band(mc)
+```
+
+```{r sweep}
+thresholds <- seq(7, p$n_days, by = 7)
+all_gap <- unlist(mc$gap_max)
+sweep <- data.frame(
+  threshold = thresholds,
+  pct_exceeding = vapply(thresholds, function(t) 100 * mean(all_gap > t), numeric(1))
+)
+knitr::kable(sweep[sweep$threshold %in% c(30, 60, 90, 180, 365), ],
+             row.names = FALSE, digits = 1,
+             caption = "Percent of providers whose maximum gap exceeds each threshold")
+```
+
+*Rendered with the halosimr package. Edit `params` above or copy this file to
+customise.*

@@ -1,0 +1,20 @@
+Package: halosimr
+Title: HALO Event Exposure and Training Simulation
+Version: 0.0.0.9000
+Authors@R: person("Daniel", "Dworkis", email = "dan@emergencymind.com", role = c("aut", "cre"))
+Description: Simulates high-acuity, low-occurrence (HALO) event exposure across
+    a provider population and models readiness decay and training effects,
+    extending the methodology of the Code Blue Blindspots paper (PMID 41633464).
+License: MIT + file LICENSE
+URL: https://github.com/EmergencyMind/halosimr
+BugReports: https://github.com/EmergencyMind/halosimr/issues
+Encoding: UTF-8
+Suggests:
+    ggplot2,
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)
+Config/roxygen2/version: 8.1.0
