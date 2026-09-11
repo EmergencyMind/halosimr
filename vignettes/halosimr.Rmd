@@ -163,11 +163,14 @@ example `halo_sim(..., readiness_model = "step", step_t2_days = 180)`.
 ## Reports
 
 For a shareable document, render the bundled template, which runs a full
-single-run plus Monte Carlo analysis from parameters you supply:
+single-run plus Monte Carlo analysis from parameters you supply. Pass
+`output_file` to control where the HTML lands; without it the output is written
+next to the template inside the installed package.
 
 ```{r report, eval = FALSE}
 rmarkdown::render(
   system.file("report_template.Rmd", package = "halosimr"),
+  output_file = path.expand("~/Desktop/halo_report.html"),
   params = list(n_providers = 200, n_days = 365, training_program = "monthly")
 )
 ```
