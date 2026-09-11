@@ -1,6 +1,6 @@
 Package: halosimr
 Title: HALO Event Exposure and Training Simulation
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: person("Daniel", "Dworkis", email = "dan@emergencymind.com", role = c("aut", "cre"))
 Description: Simulates high-acuity, low-occurrence (HALO) event exposure across
     a provider population and models readiness decay and training effects,
