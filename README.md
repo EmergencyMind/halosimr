@@ -1,5 +1,9 @@
 # halosimr
 
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/EmergencyMind/halosimr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/EmergencyMind/halosimr/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
 Simulate exposure to high-acuity, low-occurrence (HALO) events across a provider
 population, model how readiness decays between exposures, and estimate how
 training programs change it. An R implementation extending the methodology of
