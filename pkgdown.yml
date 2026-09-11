@@ -1,0 +1,9 @@
+pandoc: 3.8.3
+pkgdown: 2.2.1
+pkgdown_sha: ~
+articles:
+  halosimr: halosimr.html
+last_built: 2026-09-11T15:45Z
+urls:
+  reference: https://emergencymind.github.io/halosimr/reference
+  article: https://emergencymind.github.io/halosimr/articles
