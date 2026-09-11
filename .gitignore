@@ -6,3 +6,4 @@
 *.tar.gz
 *.Rcheck/
 inst/doc
+tools/crosscheck/expected.json
