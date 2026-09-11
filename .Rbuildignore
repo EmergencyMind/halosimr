@@ -2,5 +2,8 @@
 ^\.Rbuildignore$
 ^\.github$
 ^tools$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
 ^.*\.Rproj$
 ^\.Rproj\.user$

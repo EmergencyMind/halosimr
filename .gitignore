@@ -7,3 +7,4 @@
 *.Rcheck/
 inst/doc
 tools/crosscheck/expected.json
+docs
